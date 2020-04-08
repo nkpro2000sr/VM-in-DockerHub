@@ -1,4 +1,4 @@
-adduser nkpro --gecos "Naveen S R,18/53,," --disabled-password
+useradd -s /bin/bash nkpro
 echo "nkpro:nkpro2000sr" | chpasswd
 echo "root:toor" | chpasswd
 unset pid i ip url
