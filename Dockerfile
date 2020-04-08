@@ -4,7 +4,7 @@ LABEL author="Naveen S R" github="nkpro2000sr" \
       aim="To use DockerHub as VM using `docker build` and `ssh`"
 COPY L4ssh.sh /
 
-RUN apt-get update && apt-get upgrade && apt-get install -y openssh-server systemd curl netcat
+RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-server systemd curl netcat
 RUN service ssh restart && sh /L4ssh.sh
 ENTRYPOINT bash
 
