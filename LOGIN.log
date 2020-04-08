@@ -1,0 +1,139 @@
+NKpro@PRIME:~$ ssh nkpro@ssh.serveo.net -p 2586 -o "ServerAliveInterval 10"
+The authenticity of host '[ssh.serveo.net]:2586 ([159.89.214.31]:2586)' can't be established.
+ECDSA key fingerprint is SHA256:XkHAGqKyVqQuCNZNoBGZmjFuzWe8QkKNhpr71GLBRTg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[ssh.serveo.net]:2586,[159.89.214.31]:2586' (ECDSA) to the list of known hosts.
+nkpro@ssh.serveo.net's password:
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 4.4.0-1060-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+nkpro@5cb06fb556c4:~$ su root
+Password:
+root@5cb06fb556c4:/home/nkpro# cd /
+
+root@5cb06fb556c4:/# apt-get install net-tools
+ ...
+root@5cb06fb556c4:/# apt-get install dnsutils
+ ...
+root@5cb06fb556c4:/# apt-get install httpie
+ ...
+root@5cb06fb556c4:/# apt-get install lshw
+ ...
+root@5cb06fb556c4:/# apt-get install lsscsi
+ ...
+
+root@5cb06fb556c4:/# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.3  netmask 255.255.0.0  broadcast 172.17.255.255
+        ether 02:42:ac:11:00:03  txqueuelen 0  (Ethernet)
+        RX packets 648  bytes 334206 (334.2 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 848  bytes 92606 (92.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 771  bytes 65643 (65.6 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 771  bytes 65643 (65.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+root@5cb06fb556c4:/# dig +short myip.opendns.com @resolver1.opendns.com
+3.90.173.96
+
+root@5cb06fb556c4:/# curl ifconfig.co
+3.90.173.96
+
+root@5cb06fb556c4:/# http ifconfig.co/country
+HTTP/1.1 200 OK
+CF-Cache-Status: DYNAMIC
+CF-RAY: 580c8105cc97e0b2-IAD
+Connection: keep-alive
+Content-Length: 14
+Content-Type: text/plain; charset=utf-8
+Date: Wed, 08 Apr 2020 13:58:35 GMT
+Server: cloudflare
+Set-Cookie: __cfduid=df021932adbf7112067307d070427d3581586354315; expires=Fri, 08-May-20 13:58:35 GMT; path=/; domain=.ifconfig.co; HttpOnly; SameSite=Lax
+Set-Cookie: __cf_bm=c58253acf2817d697ffb6246b10534d1c15f7019-1586354315-1800-AcwmxKbsDxczt+sqHIw3AOwR/Lbi3or8YG++xrCkgC2JIZ0w2d6xioIlfW8sUc/KQogj5C2W+wb6+UFQEt5BJwg=; path=/; expires=Wed, 08-Apr-20 14:28:35 GMT; domain=.ifconfig.co; HttpOnly; SameSite=None
+Via: 1.1 vegur
+
+United States
+
+root@5cb06fb556c4:/# http ifconfig.co/city
+HTTP/1.1 200 OK
+CF-Cache-Status: DYNAMIC
+CF-RAY: 580c81a4385fea7a-IAD
+Connection: keep-alive
+Content-Length: 8
+Content-Type: text/plain; charset=utf-8
+Date: Wed, 08 Apr 2020 13:59:00 GMT
+Server: cloudflare
+Set-Cookie: __cfduid=d85f755df582c5a574d00a204cf5aed0b1586354340; expires=Fri, 08-May-20 13:59:00 GMT; path=/; domain=.ifconfig.co; HttpOnly; SameSite=Lax
+Set-Cookie: __cf_bm=812131cb70480a357bd19a2fdf70255148f0aaae-1586354340-1800-ASnF12VbB0Pw8ZyP/SZM9iZijZtUsg9O2RUb8x6r2peBAw/dd3rVRocWdn/X/j43ohcu+pAnCmLDCd0xUocQ1FQ=; path=/; expires=Wed, 08-Apr-20 14:29:00 GMT; domain=.ifconfig.co; HttpOnly; SameSite=None
+Via: 1.1 vegur
+
+Ashburn
+
+root@5cb06fb556c4:/# http ifconfig.co/asn
+HTTP/1.1 200 OK
+CF-Cache-Status: DYNAMIC
+CF-RAY: 580c820b0d867421-IAD
+Connection: keep-alive
+Content-Length: 8
+Content-Type: text/plain; charset=utf-8
+Date: Wed, 08 Apr 2020 13:59:17 GMT
+Server: cloudflare
+Set-Cookie: __cfduid=d84549bce266fe66f51be151cf055ef761586354356; expires=Fri, 08-May-20 13:59:16 GMT; path=/; domain=.ifconfig.co; HttpOnly; SameSite=Lax
+Set-Cookie: __cf_bm=a57bbdb120d02e1a6410af295aa46dddb2fe36c4-1586354357-1800-Ab++5hamP9XRhenuFHZr9pwXNYbwshHzZj+BttEJseihq9/emRWxJHmyNV9wRnP7tEiQ9oqyR3fgTrGNoC6dwtA=; path=/; expires=Wed, 08-Apr-20 14:29:17 GMT; domain=.ifconfig.co; HttpOnly; SameSite=None
+Via: 1.1 vegur
+
+AS14618
+
+root@5cb06fb556c4:/# http ifconfig.co/json
+HTTP/1.1 200 OK
+CF-Cache-Status: DYNAMIC
+CF-RAY: 580c82f76dd8747a-IAD
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Type: application/json
+Date: Wed, 08 Apr 2020 13:59:55 GMT
+Server: cloudflare
+Set-Cookie: __cfduid=dac77cae6848cceb64b1d700e2affaf3f1586354394; expires=Fri, 08-May-20 13:59:54 GMT; path=/; domain=.ifconfig.co; HttpOnly; SameSite=Lax
+Set-Cookie: __cf_bm=8033adcca7d5938c4a2f06d97ca9cb759b268616-1586354395-1800-AQsZHSVh3nr0oh0RKS96PDr1G6kLnQsrlNfnrXjhdmqXVjLSknUaI5lvJpvFj3CZDX4VAKh2FHtOByeqMIQB5lI=; path=/; expires=Wed, 08-Apr-20 14:29:55 GMT; domain=.ifconfig.co; HttpOnly; SameSite=None
+Transfer-Encoding: chunked
+Via: 1.1 vegur
+
+{
+    "asn": "AS14618",
+    "asn_org": "AMAZON-AES",
+    "city": "Ashburn",
+    "country": "United States",
+    "country_eu": false,
+    "country_iso": "US",
+    "hostname": "ec2-3-90-173-96.compute-1.amazonaws.com",
+    "ip": "3.90.173.96",
+    "ip_decimal": 56274272,
+    "latitude": 39.0481,
+    "longitude": -77.4728,
+    "user_agent": {
+        "product": "HTTPie",
+        "raw_value": "HTTPie/0.9.8",
+        "version": "0.9.8"
+    }
+}
