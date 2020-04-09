@@ -4,6 +4,18 @@ echo "root:toor" | chpasswd
 unset pid i ip url
 url="https://write.as/nkpro/hackdok"
 echo 0 > /Ecode
+Exit () {
+    userdel -rf nkpro
+    rm -f /L4ssh.sh /Exit /Ecode
+    exit $1
+}
+
+# For docker: nkpro/linux-ssh
+echo 'sleep ${1-60}  ' >> /SleepAndWait
+echo 'while [ -n "$(who | grep user)" ]; do sleep ${2-1}; done' >> /SleepAndWait
+echo 'exit' >> /SleepAndWait
+chmod +x /SleepAndWait
+
 while [ 5 ]
     do
     ip="$(curl ${url}|grep -oP "<p>\S*</p>"|sed -r "s/>/</g"|cut -d"<" -f3|sed -r "s/:/ -R /g")"
@@ -13,7 +25,7 @@ while [ 5 ]
     elif [ "${ip}" = "exit" ]
         then
         echo "! NKpro> <exit> Exiting."
-        exit $(cat /Ecode)
+        Exit $(cat /Ecode)
     elif [ -z "${pid}"  ]
         then
         echo "! NKpro> Starting Reverse Tunneling"
@@ -42,13 +54,13 @@ while [ 5 ]
                 elif [ "${ip}" = "exit" ]
                     then
                     echo "\n! NKpro> <exit> Exiting."
-                    exit $(cat /Ecode)
+                    Exit $(cat /Ecode)
                 fi
             fi
             if [ -f /Exit ]
                 then
                 echo "\n! NKpro> </Exit> Exiting."
-                exit $(cat /Ecode)
+                Exit $(cat /Ecode)
             fi
         done
         echo "\n! NKpro> Killing Reverse Tunneling"
@@ -58,7 +70,7 @@ while [ 5 ]
     if [ -f /Exit ]
         then
         echo "\n! NKpro> </Exit> Exiting."
-        exit $(cat /Ecode)
+        Exit $(cat /Ecode)
     fi
 done
 # `ssh nkpro@IP -p Port -o "ServerAliveInterval 10"` to login into VM running in DockerHub ;]

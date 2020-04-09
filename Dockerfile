@@ -6,4 +6,10 @@ LABEL author="Naveen S R" github="nkpro2000sr" \
 COPY L4ssh.sh /
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-server systemd curl netcat
-RUN service ssh restart && sh /L4ssh.sh && userdel -rf nkpro && rm -f /L4ssh.sh /Exit /Ecode
+RUN service ssh restart && sh /L4ssh.sh
+
+# For docker: nkpro/linux-ssh
+RUN useradd -s /bin/bash user && echo "user:passwd" | chpasswd
+ENTRYPOINT ["/bin/bash","-c", "service ssh restart; $@", "foo"]
+EXPOSE 22
+CMD ["./SleepAndWait"]
