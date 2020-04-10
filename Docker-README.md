@@ -7,7 +7,7 @@ OpenSSH, systemd, curl, netcat installed and sshd running `service ssh start`.
 
 ### Usage:
 * `docker run -p 2222:22 nkpro/linux-ssh` will start ssh-server, listening in localhost:2222. This wait 1Mins for connection and waits until the ssh session ends.   
-> you can modify this 1Min like `docker run -p 2222:22 nkpro/linux-ssh ./SleepAndWait 300`. ( 300 -> 5Mins )
+> you can modify this 1Min like `docker run -p 2222:22 nkpro/linux-ssh SleepAndWait 300`. ( 300 -> 5Mins ) ( saw = SleepAndWait )
 * `docker run -i -t nkpro/linux-ssh bash` to start interactive bash session. ssh-server also running ( `service ssh stop` to stop it ).  
 
 ##### Other Use:

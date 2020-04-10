@@ -10,12 +10,6 @@ Exit () {
     exit $1
 }
 
-# For docker: nkpro/linux-ssh
-echo 'sleep ${1-60}  ' >> /SleepAndWait
-echo 'while [ -n "$(who | grep user)" ]; do sleep ${2-1}; done' >> /SleepAndWait
-echo 'exit' >> /SleepAndWait
-chmod +x /SleepAndWait
-
 while [ 5 ]
     do
     ip="$(curl ${url}|grep -oP "<p>\S*</p>"|sed -r "s/>/</g"|cut -d"<" -f3|sed -r "s/:/ -R /g")"
