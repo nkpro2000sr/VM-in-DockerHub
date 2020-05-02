@@ -18,13 +18,13 @@ while [ 5 ]
         Exit $(cat /Ecode)
     elif [ -z "${pid}"  ]
         then
-        echo "!> Starting Reverse Tunneling"
+        echo "I> Starting Reverse Tunneling"
         ssh ${ip}:localhost:22 -o "StrictHostKeyChecking accept-new" &
         pid="$!"
     fi
     if [ -n "${pid}" ]
         then
-        echo "!> \`ssh ${ip}:localhost:22 -o \"StrictHostKeyChecking accept-new\" &\` running in ${pid}"
+        echo "|> \`ssh ${ip}:localhost:22 -o \"StrictHostKeyChecking accept-new\" &\` running in ${pid}"
         i=0
         while [ "$i" -lt 30 -o -n "$(who | grep 'user')" ]
             do
